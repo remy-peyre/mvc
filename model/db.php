@@ -26,6 +26,25 @@ function get_dbh()
     return $dbh;
 }
 
+function db_insert($table, $data = [])
+{
+    $dbh = get_dbh();
+    $query = 'INSERT INTO `' . $table . '` VALUES ("",';
+    $first = true;
+    foreach ($data AS $k => $value)
+    {
+        if (!$first)
+            $query .= ', ';
+        else
+            $first = false;
+        $query .= ':'.$k;
+    }
+    $query .= ')';
+    $sth = $dbh->prepare($query);
+    $sth->execute($data);
+    return true;
+}
+
 function find_one($query)
 {
     $dbh = get_dbh();
@@ -34,11 +53,29 @@ function find_one($query)
     return $result;
 }
 
+function find_one_secure($query, $data = [])
+{
+    $dbh = get_dbh();
+    $sth = $dbh->prepare($query);
+    $sth->execute($data);
+    $result = $sth->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
 function find_all($query)
 {
     $dbh = get_dbh();
     $data = $dbh->query($query, PDO::FETCH_ASSOC);
     $result = $data->fetchAll();
+    return $result;
+}
+
+function find_all_secure($query, $data = [])
+{
+    $dbh = get_dbh();
+    $sth = $dbh->prepare($query);
+    $sth->execute($data);
+    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
 

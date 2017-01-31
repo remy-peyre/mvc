@@ -1,9 +1,10 @@
 <?php
 
 $routes = [
-    'home'    => 'default',
-    'about'   => 'default',
-    'contact' => 'default',
+    'home'     => 'default',
+    'about'    => 'default',
+    'contact'  => 'default',
+    'register' => 'user',
 ];
 
 $db_config = [
