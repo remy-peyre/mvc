@@ -5,11 +5,13 @@ $routes = [
     'about'    => 'default',
     'contact'  => 'default',
     'register' => 'user',
+    'login'    => 'user',
+    'logout'   => 'user',
 ];
 
 $db_config = [
-    'name' => 'mvc',
+    'name' => 'mvc_test',
     'host' => 'localhost',
-    'user' => 'mvc',
-    'pass' => 'mvcpass'
+    'user' => 'root',
+    'pass' => 'root'
 ];
